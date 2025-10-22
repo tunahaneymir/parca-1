@@ -1,0 +1,14 @@
+def get_ml_features(self) -> Dict[str, float]:
+    """ML modeli için feature dictionary"""
+    return {
+        'trend_direction_numeric': 1 if self.direction == "UP" else (-1 if self.direction == "DOWN" else 0),
+        'trend_confidence': self.confidence,
+        'ema_distance_ratio': self.ema_distance_pct,
+        'atr_ratio': self.atr_ratio,
+        'price_range_ratio': self.price_range_pct,
+        'ema_slope_up': float(self.slope_up),
+        'ema_slope_down': float(self.slope_down),
+        'ema_20_value': self.ema_20,
+        'ema_50_value': self.ema_50,
+        'ema_cross_position': (self.ema_20 - self.ema_50) / self.ema_50 if self.ema_50 != 0 else 0
+    }
